@@ -16,7 +16,7 @@ Progressive Distillation (Salimans & Ho, 2022) solves this with distillating 2-s
 Install the package with
 
 ```bash
-pip install git+https://github.com/cloneofsimo/consistency_models.git
+pip install git+https://github.com/jqwenchen/explore-consistency-models.git
 ```
 
 This repo mainly implements consistency training:
