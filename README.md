@@ -1,44 +1,17 @@
-<!-- #region -->
-<p align="center">
-<img  src="contents/mainfigure.png">
-</p>
-<!-- #endregion -->
-
 
 # Consistency Models
 
-<!-- #region -->
-<p align="center">
-<img  src="contents/_ct_sample_2step_30.png">
-</p>
-<!-- #endregion -->
-
-> 30 Epoch, Consistency Model with 2 step. Using $t_1 = 2, t_2 = 80$.
-
-<!-- #region -->
-<p align="center">
-<img  src="contents/_ct_sample_5step_30.png">
-</p>
-<!-- #endregion -->
-
-> 30 Epoch, Consistency Model with 5 step. Using $t_i \in \{5, 10, 20,40, 80\}$.
+Consistency Models  ([paper](https://arxiv.org/abs/2303.01469)) 
 
 
-
-
-Unofficial Implementation of Consistency Models  ([paper](https://arxiv.org/abs/2303.01469)) in pytorch.
-
-Three days ago, legendary man [Yang Song](https://yang-song.net/) released entirely new set of generative model, called consistency models. There aren't yet any open implementations, so here is my attempt at it.
-
-
-## What are they?
+## What are Consistency Models?
 
 Diffusion models are amazing, because they enable you to sample high fidelity + high diversity images. Downside is, you need lots of steps, something at least 20.
 
 Progressive Distillation (Salimans & Ho, 2022) solves this with distillating 2-steps of the diffusion model down to single step. Doing this N times boosts sampling speed by $2^N$. But is this the only way? Do we need to train diffusion model and distill it $n$ times? Yang didn't think so. Consistency model solves this by mainly trianing a model to make a consistent denosing for different timesteps (Ok I'm obviously simplifying)
 
 
-## Usage
+## How to Use
 
 Install the package with
 
@@ -63,18 +36,11 @@ x &\leftarrow f_\theta(x, t_n) \\
 $$
 
 
-There is a self-contained MNIST training example on the root `main.py`.
+There is a self-contained MNIST  and ImageNet-9 training example on the root `main.py` and `main_imagenet9.py`.
 
 ```bash
 python main.py
 ```
-
-## Todo
-
-- [x] EMA
-- [x] CIFAR10 Example
-- [x] Samples are sooo fuzzy... try to get a crisp result.
-- [ ] Consistency Distillation
 
 # Reference
 
