@@ -1,5 +1,5 @@
 
-# Consistency Models
+# Consistency Models 
 
 Consistency Models  ([paper](https://arxiv.org/abs/2303.01469)) 
 
@@ -11,6 +11,30 @@ Diffusion models are amazing, because they enable you to sample high fidelity + 
 Progressive Distillation (Salimans & Ho, 2022) solves this with distillating 2-steps of the diffusion model down to single step. Doing this N times boosts sampling speed by $2^N$. But is this the only way? Do we need to train diffusion model and distill it $n$ times? Yang didn't think so. Consistency model solves this by mainly trianing a model to make a consistent denosing for different timesteps (Ok I'm obviously simplifying)
 
 
+## Two modes of Training Consistency Models
+
+###  distillation mode
+* Logic: This method relies on using numerical ODE solvers and a pre-trained
+diffusion model to generate pairs of adjacent points on a
+PF ODE trajectory. By minimizing the difference between
+model outputs for these pairs, we can effectively distill a
+diffusion model into a consistency model, which allows generating high-quality samples with one network evaluation.
+
+* Process: Consistency models distill the knowledge of pre-trained
+diffusion models into a single-step sampler, significantly
+improving other distillation approaches in sample quality, 
+while allowing zero-shot image editing applications.
+
+###  isolation mode
+* Logic: second method eliminates the need for a
+pre-trained diffusion model altogether, allowing us to train
+a consistency model in isolation. This approach situates
+consistency models as an independent family of generative
+models.
+* Process: Consistency models are trained in isolation, with
+no dependence on pre-trained diffusion models. This makes
+them an independent new class of generative models.
+
 ## How to Use
 
 Install the package with
@@ -20,21 +44,6 @@ pip install git+https://github.com/jqwenchen/explore-consistency-models.git
 ```
 
 This repo mainly implements consistency training:
-
-$$
-L(\theta) = \mathbb{E}[d(f_\theta(x + t_{n + 1}z, t_{n + 1}), f_{\theta_{-}}(x + t_n z, t_n))]
-$$
-
-And sampling:
-
-$$
-\begin{align}
-z &\sim \mathcal{N}(0, I) \\
-x &\leftarrow x + \sqrt{t_n ^2 - \epsilon^2} z \\
-x &\leftarrow f_\theta(x, t_n) \\
-\end{align}
-$$
-
 
 There is a self-contained MNIST  and ImageNet-9 training example on the root `main.py` and `main_imagenet9.py`.
 
