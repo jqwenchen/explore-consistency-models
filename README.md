@@ -1,2 +1,2 @@
-# explore-consistency-models
+# consistency-models
 consistency-models
