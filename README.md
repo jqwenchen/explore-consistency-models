@@ -41,6 +41,9 @@ There is a self-contained MNIST  and ImageNet-9 training example on the root `ma
 ```bash
 python main.py
 ```
+```bash
+python main_imagenet9.py
+```
 
 # Reference
 
